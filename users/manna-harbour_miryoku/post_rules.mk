@@ -1,27 +1,7 @@
-# Copyright 2019 Manna Harbour
+# Copyright 2022 Manna Harbour
 # https://github.com/manna-harbour/miryoku
 
-CONVERT_TO=liatris
-ENCODER_ENABLE=false
-RGBLIGHT_ENABLE=true
-BACKLIGHT_ENABLE=true
-WPM_ENABLE = yes
-
-MOUSEKEY_ENABLE = yes
-EXTRAKEY_ENABLE = yes
-AUTO_SHIFT_ENABLE = yes
-TAP_DANCE_ENABLE = yes
-CAPS_WORD_ENABLE = yes
-KEY_OVERRIDE_ENABLE = yes
-
-MIRYOKU_CLIPBOARD=MAC
-MIRYOKU_ALPHAS = QWERTY
-MIRYOKU_TAP=QWERTY
-MIRYOKU_EXTRA=QWERTY
-MIRYOKU_NAV=VI
-
-
-
+# alternative layout options
 
 ifneq ($(strip $(MIRYOKU_ALPHAS)),)
   OPT_DEFS += -DMIRYOKU_ALPHAS_$(MIRYOKU_ALPHAS)
