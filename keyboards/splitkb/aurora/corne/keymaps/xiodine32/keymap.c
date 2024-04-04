@@ -267,40 +267,42 @@ static void render_layer_state(void) {
     }
 }
 layer_state_t layer_state_set_user(layer_state_t state) {
-    layer_state = state;
+    layer_state       = state;
+    int current_value = rgblight_get_val();
+    int current_sat   = rgblight_get_sat();
     switch (get_highest_layer(layer_state)) {
         case U_BASE:
-            rgb_matrix_sethsv_noeeprom(0x55, 255, 255);
+            rgb_matrix_sethsv(0x55, current_sat, current_value);
             break;
         case U_EXTRA:
-            rgb_matrix_sethsv_noeeprom(0x20, 255, 255);
+            rgb_matrix_sethsv(0x20, current_sat, current_value);
             break;
         case U_TAP:
-            rgb_matrix_sethsv_noeeprom(0x0, 255, 255);
+            rgb_matrix_sethsv(0x0, current_sat, current_value);
             break;
         case U_BUTTON:
-            rgb_matrix_sethsv_noeeprom(0x60, 255, 255);
+            rgb_matrix_sethsv(0x60, current_sat, current_value);
             break;
         case U_NAV:
-            rgb_matrix_sethsv_noeeprom(0x80, 255, 255);
+            rgb_matrix_sethsv(0x80, current_sat, current_value);
             break;
         case U_MOUSE:
-            rgb_matrix_sethsv_noeeprom(0xa0, 255, 255);
+            rgb_matrix_sethsv(0xa0, current_sat, current_value);
             break;
         case U_MEDIA:
-            rgb_matrix_sethsv_noeeprom(0xc0, 255, 255);
+            rgb_matrix_sethsv(0xc0, current_sat, current_value);
             break;
         case U_NUM:
-            rgb_matrix_sethsv_noeeprom(0xe0, 255, 255);
+            rgb_matrix_sethsv(0xe0, current_sat, current_value);
             break;
         case U_SYM:
-            rgb_matrix_sethsv_noeeprom(0x80, 255, 255);
+            rgb_matrix_sethsv(0x80, current_sat, current_value);
             break;
         case U_FUN:
-            rgb_matrix_sethsv_noeeprom(0x90, 255, 255);
+            rgb_matrix_sethsv(0x90, current_sat, current_value);
             break;
         default: //  for any other layers, or the default layer
-            rgb_matrix_sethsv_noeeprom(0xA0, 255, 255);
+            rgb_matrix_sethsv(0xA0, current_sat, current_value);
             break;
     }
     return state;
