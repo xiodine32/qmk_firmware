@@ -94,7 +94,7 @@ static void render_kb_LED_state(void) {
     // Host Keyboard LED Status
     led_t led_usb_state = host_keyboard_led_state();
     oled_write_P(led_usb_state.num_lock ? PSTR("N ") : PSTR("  "), false);
-    oled_write_P(led_usb_state.caps_lock ? PSTR("C ") : PSTR("  "), false);
+    oled_write_P(led_usb_state.caps_lock ? PSTR("C ") : is_caps_word_on() ? PSTR("CW") : PSTR("  "), false);
     oled_write_P(led_usb_state.scroll_lock ? PSTR("S ") : PSTR("  "), false);
 }
 
