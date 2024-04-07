@@ -20,7 +20,7 @@ MIRYOKU_TAP=QWERTY
 MIRYOKU_EXTRA=QWERTY
 MIRYOKU_NAV=VI
 
-
+DEBOUNCE_TYPE = asym_eager_defer_pk
 
 
 ifneq ($(strip $(MIRYOKU_ALPHAS)),)
