@@ -1,65 +1,86 @@
+// Copyright 2022 Manna Harbour
+// https://github.com/manna-harbour/miryoku
+
+// This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 2 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 #include QMK_KEYBOARD_H
 
-#define SM_LSFT OSM(MOD_LSFT)
-#define SM_RSFT OSM(MOD_RSFT)
-#define SM_LCTL OSM(MOD_LCTL)
-#define SM_RCTL OSM(MOD_RCTL)
-#define SM_LALT OSM(MOD_LALT)
-#define SM_RALT OSM(MOD_RALT)
-#define SM_LGUI OSM(MOD_LGUI)
-#define SM_RGUI OSM(MOD_RGUI)
+#define LAYOUT_miryoku(K00, K01, K02, K03, K04, K05, K06, K07, K08, K09, K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, K20, K21, K22, K23, K24, K25, K26, K27, K28, K29, N30, N31, K32, K33, K34, K35, K36, K37, N38, N39) LAYOUT_split_3x6_3(KC_NO, K00, K01, K02, K03, K04, K05, K06, K07, K08, K09, KC_NO, KC_NO, K10, K11, K12, K13, K14, K15, K16, K17, K18, K19, KC_NO, KC_NO, K20, K21, K22, K23, K24, K25, K26, K27, K28, K29, KC_NO, K32, K33, K34, K35, K36, K37)
 
-// clang-format off
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      SM_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      SM_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          SM_LGUI,   MO(1),  KC_SPC,     KC_ENT,   MO(2), SM_RALT
-                                      //`--------------------------'  `--------------------------'
-  ),
+#include "manna-harbour_miryoku.h"
 
-    [1] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, SM_LGUI, SM_LALT, SM_LCTL, SM_LSFT, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_DEL, CW_TOGG,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS,  KC_ESC,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______,   MO(3), _______
-                                      //`--------------------------'  `--------------------------'
-  ),
+// Additional Features double tap guard
 
-    [2] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, SM_LGUI, SM_LALT, SM_LCTL, SM_LSFT, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______,   MO(3), _______,   _______, _______, _______
-                                      //`--------------------------'  `--------------------------'
-  ),
-
-    [3] = LAYOUT_split_3x6_3(
-  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_MPLY,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, KC_CAPS,
-  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI,                      KC_BTN1, KC_WH_D, KC_WH_U, KC_BTN2, RGB_TOG, QK_BOOT,
-  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,   _______, _______, _______
-                                      //`--------------------------'  `--------------------------'
-  )
+enum {
+    U_TD_BOOT,
+#define MIRYOKU_X(LAYER, STRING) U_TD_U_##LAYER,
+    MIRYOKU_LAYER_LIST
+#undef MIRYOKU_X
 };
-// clang-format on
+
+void u_td_fn_boot(tap_dance_state_t *state, void *user_data) {
+    if (state->count == 2) {
+        reset_keyboard();
+    }
+}
+
+#define MIRYOKU_X(LAYER, STRING)                                        \
+    void u_td_fn_U_##LAYER(tap_dance_state_t *state, void *user_data) { \
+        if (state->count == 2) {                                        \
+            default_layer_set((layer_state_t)1 << U_##LAYER);           \
+        }                                                               \
+    }
+MIRYOKU_LAYER_LIST
+#undef MIRYOKU_X
+
+tap_dance_action_t tap_dance_actions[] = {[U_TD_BOOT] = ACTION_TAP_DANCE_FN(u_td_fn_boot),
+#define MIRYOKU_X(LAYER, STRING) [U_TD_U_##LAYER] = ACTION_TAP_DANCE_FN(u_td_fn_U_##LAYER),
+                                          MIRYOKU_LAYER_LIST
+#undef MIRYOKU_X
+};
+
+// keymap
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+#define MIRYOKU_X(LAYER, STRING) [U_##LAYER] = U_MACRO_VA_ARGS(MIRYOKU_LAYERMAPPING_##LAYER, MIRYOKU_LAYER_##LAYER),
+    MIRYOKU_LAYER_LIST
+#undef MIRYOKU_X
+};
+
+// shift functions
+
+const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
+
+const key_override_t **key_overrides = (const key_override_t *[]){&capsword_key_override, NULL};
+
+// thumb combos
+
+#if defined(MIRYOKU_KLUDGE_THUMBCOMBOS)
+const uint16_t PROGMEM thumbcombos_base_right[] = {LT(U_SYM, KC_ENT), LT(U_NUM, KC_BSPC), COMBO_END};
+const uint16_t PROGMEM thumbcombos_base_left[]  = {LT(U_NAV, KC_SPC), LT(U_MOUSE, KC_TAB), COMBO_END};
+const uint16_t PROGMEM thumbcombos_nav[]        = {KC_ENT, KC_BSPC, COMBO_END};
+const uint16_t PROGMEM thumbcombos_mouse[]      = {KC_BTN2, KC_BTN1, COMBO_END};
+const uint16_t PROGMEM thumbcombos_media[]      = {KC_MSTP, KC_MPLY, COMBO_END};
+const uint16_t PROGMEM thumbcombos_num[]        = {KC_0, KC_MINS, COMBO_END};
+#    if defined(MIRYOKU_LAYERS_FLIP)
+const uint16_t PROGMEM thumbcombos_sym[] = {KC_UNDS, KC_LPRN, COMBO_END};
+#    else
+const uint16_t PROGMEM thumbcombos_sym[] = {KC_RPRN, KC_UNDS, COMBO_END};
+#    endif
+const uint16_t PROGMEM thumbcombos_fun[]       = {KC_SPC, KC_TAB, COMBO_END};
+combo_t                key_combos[COMBO_COUNT] = {COMBO(thumbcombos_base_right, LT(U_FUN, KC_DEL)),
+                                                  COMBO(thumbcombos_base_left, LT(U_MEDIA, KC_ESC)),
+                                                  COMBO(thumbcombos_nav, KC_DEL),
+                                                  COMBO(thumbcombos_mouse, KC_BTN3),
+                                                  COMBO(thumbcombos_media, KC_MUTE),
+                                                  COMBO(thumbcombos_num, KC_DOT),
+#    if defined(MIRYOKU_LAYERS_FLIP)
+                                   COMBO(thumbcombos_sym, KC_RPRN),
+#    else
+                                   COMBO(thumbcombos_sym, KC_LPRN),
+#    endif
+                                                  COMBO(thumbcombos_fun, KC_APP)};
+#endif
 
 void keyboard_pre_init_user(void) {
     // Set our LED pin as output
@@ -75,25 +96,6 @@ static void render_kb_LED_state(void) {
     oled_write_P(led_usb_state.num_lock ? PSTR("N ") : PSTR("  "), false);
     oled_write_P(led_usb_state.caps_lock ? PSTR("C ") : is_caps_word_on() ? PSTR("CW") : PSTR("  "), false);
     oled_write_P(led_usb_state.scroll_lock ? PSTR("S ") : PSTR("  "), false);
-}
-static void render_layer_state(void) {
-    switch (get_highest_layer(layer_state | default_layer_state)) {
-        case 0:
-            oled_write_P(PSTR("BASIC"), false);
-            break;
-        case 1:
-            oled_write_P(PSTR("NUMBR"), false);
-            break;
-        case 2:
-            oled_write_P(PSTR("SYMBL"), false);
-            break;
-        case 3:
-            oled_write_P(PSTR("FUNCT"), false);
-            break;
-        default:
-            oled_write_P(PSTR("?????"), false);
-            break;
-    }
 }
 
 static void render_mod_status_gui_alt(uint8_t modifiers) {
@@ -226,6 +228,84 @@ static void render_mod_status_ctrl_shift(uint8_t modifiers) {
     } else {
         oled_write_P(shift_off_2, false);
     }
+}
+static void render_layer_state(void) {
+    switch (get_highest_layer(layer_state)) {
+        case U_BASE:
+            oled_write_P(PSTR("BASIC"), false);
+            break;
+        case U_EXTRA:
+            oled_write_P(PSTR("EXTRA"), false);
+            break;
+        case U_TAP:
+            oled_write_P(PSTR("EXTRA"), false);
+            break;
+        case U_BUTTON:
+            oled_write_P(PSTR("BUTTN"), false);
+            break;
+        case U_NAV:
+            oled_write_P(PSTR(" NAV "), false);
+            break;
+        case U_MOUSE:
+            oled_write_P(PSTR("MOUSE"), false);
+            break;
+        case U_MEDIA:
+            oled_write_P(PSTR("MEDIA"), false);
+            break;
+        case U_NUM:
+            oled_write_P(PSTR(" NUM "), false);
+            break;
+        case U_SYM:
+            oled_write_P(PSTR(" SYM "), false);
+            break;
+        case U_FUN:
+            oled_write_P(PSTR(" FUN "), false);
+            break;
+        default: //  for any other layers, or the default layer
+            oled_write_P(PSTR("     "), false);
+            break;
+    }
+}
+layer_state_t layer_state_set_user(layer_state_t state) {
+    layer_state       = state;
+    int current_value = rgblight_get_val();
+    int current_sat   = rgblight_get_sat();
+    switch (get_highest_layer(layer_state)) {
+        case U_BASE:
+            rgb_matrix_sethsv(0x55, current_sat, current_value);
+            break;
+        case U_EXTRA:
+            rgb_matrix_sethsv(0x20, current_sat, current_value);
+            break;
+        case U_TAP:
+            rgb_matrix_sethsv(0x0, current_sat, current_value);
+            break;
+        case U_BUTTON:
+            rgb_matrix_sethsv(0x60, current_sat, current_value);
+            break;
+        case U_NAV:
+            rgb_matrix_sethsv(0x80, current_sat, current_value);
+            break;
+        case U_MOUSE:
+            rgb_matrix_sethsv(0xa0, current_sat, current_value);
+            break;
+        case U_MEDIA:
+            rgb_matrix_sethsv(0xc0, current_sat, current_value);
+            break;
+        case U_NUM:
+            rgb_matrix_sethsv(0xe0, current_sat, current_value);
+            break;
+        case U_SYM:
+            rgb_matrix_sethsv(0x80, current_sat, current_value);
+            break;
+        case U_FUN:
+            rgb_matrix_sethsv(0x90, current_sat, current_value);
+            break;
+        default: //  for any other layers, or the default layer
+            rgb_matrix_sethsv(0xA0, current_sat, current_value);
+            break;
+    }
+    return state;
 }
 
 bool oled_task_user(void) {
